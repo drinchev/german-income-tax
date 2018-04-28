@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "noImplicitReturns": true,
+    "noImplicitAny": true,
+    "module": "commonjs",
+    "noEmitOnError": true,
+    "declaration": true,
+    "listEmittedFiles": true,
+    "target": "es6",
+    "outDir": "./dist"
+  },
+  "include": [
+    "./src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "./test"
+  ]
+}
