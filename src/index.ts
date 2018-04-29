@@ -1,8 +1,8 @@
 /**
- *  German Freelance Tax
+ *  German Income Tax
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *
- *  Calculates the tax you owe in Germany, if working as a freelancer
+ *  Calculates the tax for germany, including income tax and solidarity tax
  *
  */
 
@@ -40,6 +40,17 @@ function getZone( income : number, year : Year ) {
         return Zone.Fifth;
     }
 
+}
+
+/**
+ * Calculate the solidarity tax
+ *
+ * @param tax
+ * @param year
+ */
+function solidarity( tax : number, year : Year ) {
+    const { solidarity } = parameters[year];
+    return (solidarity * tax).toFixed( 2 );
 }
 
 /**

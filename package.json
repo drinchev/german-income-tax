@@ -29,9 +29,9 @@
     "coverage": "npm run coverage:nyc",
     "test": "npm run coverage"
   },
-  "description": "Calculates the german freelance tax",
+  "description": "Calculates the german income tax",
   "license": "SEE LICENSE IN LICENSE",
-  "name": "@drinchev/german-freelance-tax",
+  "name": "german-income-tax",
   "version": "0.0.1",
   "engines": {
     "node": ">=6.5.0"
@@ -42,6 +42,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:drinchev/german-freelance-tax.git"
+    "url": "git@github.com:drinchev/german-income-tax.git"
   }
 }

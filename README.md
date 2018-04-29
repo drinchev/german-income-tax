@@ -1,8 +1,8 @@
-# German Freelance Tax
+# German Income Tax
 
-[![build status](https://img.shields.io/circleci/token/9db7564a37b0135e3a814c7db003f1a7a50f2e6c/project/drinchev/german-freelance-tax/master.svg)](https://circleci.com/gh/drinchev/german-freelance-tax)
+[![build status](https://img.shields.io/circleci/token/9db7564a37b0135e3a814c7db003f1a7a50f2e6c/project/drinchev/german-income-tax/master.svg)](https://circleci.com/gh/drinchev/german-income-tax)
 
-Calculates the german freelance tax
+Calculates the german income tax
 
 ## Description
 
@@ -11,7 +11,7 @@ Calculates the german freelance tax
 ## Installation
 
 ```
-$ npm install @drinchev/german-freelance-tax
+$ npm install german-income-tax
 ```
 
 ## Usage

@@ -16,7 +16,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: v1-german-freelance-tax-{{ checksum "package.json" }}
+          key: v1-german-income-tax-{{ checksum "package.json" }}
       - run:
           name: Adding NPM Token
           command: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
@@ -24,7 +24,7 @@ jobs:
           name: Installing dependencies
           command: npm install
       - save_cache:
-          key: v1-german-freelance-tax-{{ checksum "package.json" }}
+          key: v1-german-income-tax-{{ checksum "package.json" }}
           paths:
             - node_modules
       - run:
@@ -37,32 +37,6 @@ jobs:
           path: ~/junit
       - store_artifacts:
           path: ~/junit
-  publish:
-    docker:
-      - image: circleci/node:8.0
-    steps:
-      - checkout
-      - restore_cache:
-          key: v1-german-freelance-tax-{{ checksum "package.json" }}
-      - run:
-          name: Adding NPM Token
-          command: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
-      - run:
-          name: Installing dependencies
-          command: npm install
-      - save_cache:
-          key: v1-german-freelance-tax-{{ checksum "package.json" }}
-          paths:
-            - node_modules
-      - run:
-          name: Building
-          command: npm run build
-      - run:
-          name: Adding npm token
-          command: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
-      - run:
-          name: Publishing to npm
-          command: npm publish --access restricted
 
 workflows:
   version: 2
@@ -72,11 +46,3 @@ workflows:
           filters:
             tags:
               only: /.*/
-      - publish:
-          requires:
-            - build
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /v[0-9]+(\.[0-9]+)*/

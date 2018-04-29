@@ -1,5 +1,5 @@
 /**
- *  German Freelance Tax / Constants
+ *  German Income Tax / Constants
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *
  *  Some constant numbers, that the government provides each year

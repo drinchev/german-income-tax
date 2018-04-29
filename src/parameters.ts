@@ -1,5 +1,5 @@
 /**
- *  German Freelance Tax / Parameters
+ *  German Income Tax / Parameters
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *
  *  We store the parameters for the different years
@@ -34,7 +34,8 @@ export default {
         percent : {
             [Zone.Fourth] : 0.42,
             [Zone.Fifth] : 0.45,
-        }
+        },
+        solidarity : 0.055
     },
 
     /**
@@ -53,7 +54,8 @@ export default {
         percent : {
             [Zone.Fourth] : 0.42,
             [Zone.Fifth] : 0.45,
-        }
+        },
+        solidarity : 0.055
     },
 
     /**
@@ -72,7 +74,8 @@ export default {
         percent : {
             [Zone.Fourth] : 0.42,
             [Zone.Fifth] : 0.45,
-        }
+        },
+        solidarity : 0.055
     },
 
     /**
@@ -91,7 +94,8 @@ export default {
         percent : {
             [Zone.Fourth] : 0.42,
             [Zone.Fifth] : 0.45,
-        }
+        },
+        solidarity : 0.055
     }
 };
 
