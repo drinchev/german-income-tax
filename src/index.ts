@@ -7,22 +7,16 @@
  */
 
 /** Local Dependencies */
-import { Year, Zone } from "./constants";
-import parameters from "./parameters";
+import parameters, { Year, Zone } from "./parameters";
 
 /** Exports */
-export { Year } from "./constants";
-
-/**
- * Options provided to the tax function
- */
-export interface TaxOptions {}
+export { Year } from "./parameters";
 
 /**
  * Will return which zone is the income of the person
  *
  * @param income  The income of the person
- * @param year    The year which we want to check
+ * @param year    The year that this income was earned
  */
 function getZone( income : number, year : Year ) {
 
@@ -45,12 +39,21 @@ function getZone( income : number, year : Year ) {
 /**
  * Calculate the solidarity tax
  *
- * @param tax
- * @param year
+ * The solidarity tax is not applied for income tax below certain threshold.
+ *
+ * https://de.wikipedia.org/wiki/Solidaritätszuschlag
+ *
+ * @param tax     The income tax paid
+ * @param year    The year that the tax was for
+ * @param couple  Calculate as if the income of a married couple
  */
-function solidarity( tax : number, year : Year ) {
-    const { solidarity } = parameters[year];
-    return (solidarity * tax).toFixed( 2 );
+function solidarity( tax : number, year : Year, couple : boolean ) {
+    const { solidarity, solidarityThreshold } = parameters[year];
+    if ( tax <= solidarityThreshold * (couple ? 2 : 1) ) { return 0; }
+    return Math.min(
+        solidarity * tax,
+        (tax - (solidarityThreshold * (couple ? 2 : 1))) * 0.2
+    );
 }
 
 /**
@@ -60,9 +63,9 @@ function solidarity( tax : number, year : Year ) {
  *
  * https://de.wikipedia.org/wiki/Einkommensteuer_(Deutschland)#Tarif_2018
  *
- * @param income
- * @param year
- * @param zone
+ * @param income  The income of the individual(s)
+ * @param year    The year that this income was earned
+ * @param zone    The zone which this income is in
  */
 function tax( income : number, year : Year, zone : Zone ) : number {
 
@@ -84,35 +87,51 @@ function tax( income : number, year : Year, zone : Zone ) : number {
         case Zone.Fifth:
             return (percent[Zone.Fifth] * (income - zoneBoundaries[4])) +
                 tax( zoneBoundaries[4], year, Zone.Fourth );
-        default:
-            throw Error( "Zone can't be found" );
     }
 
 }
 
 /**
- * Calculate taxes for married
+ * Options provided to the tax function
  */
-export function family( incomeA : number, incomeB : number, year : Year ) {
-
-    const split = (incomeA + incomeB) / 2,
-          zone  = getZone( split, year );
-
-    return Math.floor( 2 * (tax( split, year, zone )) );
-
+export interface TaxOptions {
+    couple? : boolean
 }
 
 /**
  * Calculate the tax
  *
- * @param income
- * @param year
- * @param options
+ * @param income          The income of the individual(s)
+ * @param year            The year that income was earned
+ * @param options         Additional options
+ * @param options.couple  Calculate as is the income of a married couple
  */
 export default function( income : number, year : Year, options : TaxOptions = {} ) {
 
-    const zone = getZone( income, year );
+    const result = {
+        incomeTax : 0,
+        solidarityTax : 0
+    };
 
-    return Math.floor( tax( income, year, zone ) );
+    if ( options.couple ) {
+        const spl = income / 2;
+        result.incomeTax = Math.floor(
+            2 * Math.floor( tax( spl, year, getZone( spl, year ) ) )
+        );
+    } else {
+        result.incomeTax = Math.floor( tax( income, year, getZone( income, year ) ) );
+    }
+
+    // if ( income === 18000 ) {
+    //     const spl = income / 2;
+    //     console.log( tax( spl, year, getZone( spl, year ) ) );
+    //     console.log( 2 * Math.floor( tax( spl, year, getZone( spl, year ) ) ) );
+    // }
+
+    result.solidarityTax = Math.round(
+        solidarity( result.incomeTax, year, options.couple ) * 100
+    ) / 100;
+
+    return result;
 
 }

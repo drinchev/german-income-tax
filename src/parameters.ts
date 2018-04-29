@@ -10,8 +10,26 @@
  *
  */
 
-/** Local Dependencies */
-import { Year, Zone } from "./constants";
+/**
+ * Years that we have data for
+ */
+export enum Year {
+    Y2015 = 2015,
+    Y2016 = 2016,
+    Y2017 = 2017,
+    Y2018 = 2018
+}
+
+/**
+ * The zones that we have the tax
+ */
+export enum Zone {
+    First  = "First",
+    Second = "Second",
+    Third  = "Third",
+    Fourth = "Fourth",
+    Fifth  = "Fifth"
+}
 
 /**
  * We keep for each year the parameters that are relevant for calculating the tax
@@ -35,7 +53,8 @@ export default {
             [Zone.Fourth] : 0.42,
             [Zone.Fifth] : 0.45,
         },
-        solidarity : 0.055
+        solidarity : 0.055,
+        solidarityThreshold : 972
     },
 
     /**
@@ -55,7 +74,8 @@ export default {
             [Zone.Fourth] : 0.42,
             [Zone.Fifth] : 0.45,
         },
-        solidarity : 0.055
+        solidarity : 0.055,
+        solidarityThreshold : 972
     },
 
     /**
@@ -75,7 +95,8 @@ export default {
             [Zone.Fourth] : 0.42,
             [Zone.Fifth] : 0.45,
         },
-        solidarity : 0.055
+        solidarity : 0.055,
+        solidarityThreshold : 972
     },
 
     /**
@@ -95,7 +116,8 @@ export default {
             [Zone.Fourth] : 0.42,
             [Zone.Fifth] : 0.45,
         },
-        solidarity : 0.055
+        solidarity : 0.055,
+        solidarityThreshold : 972
     }
 };
 

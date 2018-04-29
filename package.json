@@ -5,15 +5,17 @@
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "devDependencies": {
-    "chai": "^4.1.2",
     "@types/chai": "^4.1.2",
-    "mocha": "^5.0.4",
     "@types/mocha": "^2.2.40",
-    "ts-node": "^5.0.1",
+    "@types/node": "^10.0.0",
+    "chai": "^4.1.2",
+    "csv": "^3.0.2",
+    "mocha": "^5.0.4",
     "mocha-junit-reporter": "^1.13.0",
+    "nsp": "^3.2.1",
     "nyc": "^11.6.0",
-    "typescript": "^2.7.2",
-    "nsp": "^3.2.1"
+    "ts-node": "^5.0.1",
+    "typescript": "^2.7.2"
   },
   "scripts": {
     "test:mocha:unit": "mocha --recursive --require ts-node/register 'test/**/*.ts'",
