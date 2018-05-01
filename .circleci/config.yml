@@ -18,9 +18,6 @@ jobs:
       - restore_cache:
           key: v1-german-income-tax-{{ checksum "package.json" }}
       - run:
-          name: Adding NPM Token
-          command: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
-      - run:
           name: Installing dependencies
           command: npm install
       - save_cache:
