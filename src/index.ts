@@ -42,6 +42,7 @@ function getZone( income : number, year : Year ) {
  * The solidarity tax is not applied for income tax below certain threshold.
  *
  * https://de.wikipedia.org/wiki/Solidaritätszuschlag
+ * https://www.ihk-muenchen.de/ihk/documents/Recht-Steuern/Steuerrecht/Einkommensteuer/Gesetz-zur-Umsetzung-der-Änderungen-der-EU-Amtshilferichtlinie.pdf
  *
  * @param tax     The income tax paid
  * @param year    The year that the tax was for
@@ -121,12 +122,6 @@ export default function( income : number, year : Year, options : TaxOptions = {}
     } else {
         result.incomeTax = Math.floor( tax( income, year, getZone( income, year ) ) );
     }
-
-    // if ( income === 18000 ) {
-    //     const spl = income / 2;
-    //     console.log( tax( spl, year, getZone( spl, year ) ) );
-    //     console.log( 2 * Math.floor( tax( spl, year, getZone( spl, year ) ) ) );
-    // }
 
     result.solidarityTax = Math.round(
         solidarity( result.incomeTax, year, options.couple ) * 100
