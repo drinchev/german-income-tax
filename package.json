@@ -34,7 +34,7 @@
   "description": "Calculates the german income tax",
   "license": "MIT",
   "name": "german-income-tax",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "engines": {
     "node": ">=6.5.0"
   },
