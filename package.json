@@ -32,9 +32,9 @@
     "test": "npm run coverage"
   },
   "description": "Calculates the german income tax",
-  "license": "SEE LICENSE IN LICENSE",
+  "license": "MIT",
   "name": "german-income-tax",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "engines": {
     "node": ">=6.5.0"
   },
