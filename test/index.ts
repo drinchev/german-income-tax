@@ -172,4 +172,17 @@ describe( "Tax / Family", function() {
         } );
     } );
 
+    it( "should calculate taxes for 2019 properly", function( done ) {
+        loadFixture( "2019-c", function( error : any, data : any ) {
+            if ( error ) { throw error; }
+            data.forEach( ( row : any ) => {
+                tax( row.income, Year.Y2019, { couple : true } ).should.deep.equal( {
+                    incomeTax : row.tax,
+                    solidarityTax : row.solidarity
+                } );
+            } );
+            done();
+        } );
+    } );
+
 } );
