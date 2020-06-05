@@ -103,6 +103,19 @@ describe( "Tax / Individual", function() {
         } );
     } );
 
+    it( "should calculate taxes for 2019 properly", function( done ) {
+        loadFixture( "2019-i", function( error : any, data : any ) {
+            if ( error ) { throw error; }
+            data.forEach( ( row : any ) => {
+                tax( row.income, Year.Y2019 ).should.deep.equal( {
+                    incomeTax : row.tax,
+                    solidarityTax : row.solidarity
+                } );
+            } );
+            done();
+        } );
+    } );
+
 } );
 
 describe( "Tax / Family", function() {
