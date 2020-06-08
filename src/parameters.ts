@@ -17,7 +17,9 @@ export enum Year {
     Y2015 = 2015,
     Y2016 = 2016,
     Y2017 = 2017,
-    Y2018 = 2018
+    Y2018 = 2018,
+    Y2019 = 2019,
+    Y2020 = 2020
 }
 
 /**
@@ -111,6 +113,48 @@ export default {
         progression : {
             [Zone.Second] : 997.80,
             [Zone.Third] : 220.13
+        },
+        percent : {
+            [Zone.Fourth] : 0.42,
+            [Zone.Fifth] : 0.45,
+        },
+        solidarity : 0.055,
+        solidarityThreshold : 972
+    },
+
+    /**
+     * 2019
+     */
+    [Year.Y2019] : {
+        zoneBoundaries : [0, 9168, 14254, 55960, 265326, Infinity],
+        threshold : {
+            [Zone.Second] : 0.14,
+            [Zone.Third] : 0.2397
+        },
+        progression : {
+            [Zone.Second] : 980.14,
+            [Zone.Third] : 216.16
+        },
+        percent : {
+            [Zone.Fourth] : 0.42,
+            [Zone.Fifth] : 0.45,
+        },
+        solidarity : 0.055,
+        solidarityThreshold : 972
+    },
+
+    /**
+     * 2020
+     */
+    [Year.Y2020] : {
+        zoneBoundaries : [0, 9408, 14532, 57051, 270500, Infinity],
+        threshold : {
+            [Zone.Second] : 0.14,
+            [Zone.Third] : 0.2397
+        },
+        progression : {
+            [Zone.Second] : 972.87,
+            [Zone.Third] : 212.02
         },
         percent : {
             [Zone.Fourth] : 0.42,

@@ -103,6 +103,31 @@ describe( "Tax / Individual", function() {
         } );
     } );
 
+    it( "should calculate taxes for 2019 properly", function( done ) {
+        loadFixture( "2019-i", function( error : any, data : any ) {
+            if ( error ) { throw error; }
+            data.forEach( ( row : any ) => {
+                tax( row.income, Year.Y2019 ).should.deep.equal( {
+                    incomeTax : row.tax,
+                    solidarityTax : row.solidarity
+                } );
+            } );
+            done();
+        } );
+    } );
+
+    it( "should calculate taxes for 2020 properly", function( done ) {
+        loadFixture( "2020-i", function( error : any, data : any ) {
+            if ( error ) { throw error; }
+            data.forEach( ( row : any ) => {
+                tax( row.income, Year.Y2020 ).should.deep.equal( {
+                    incomeTax : row.tax,
+                    solidarityTax : row.solidarity
+                } );
+            } );
+            done();
+        } );
+    } );
 } );
 
 describe( "Tax / Family", function() {
@@ -151,6 +176,32 @@ describe( "Tax / Family", function() {
             if ( error ) { throw error; }
             data.forEach( ( row : any ) => {
                 tax( row.income, Year.Y2018, { couple : true } ).should.deep.equal( {
+                    incomeTax : row.tax,
+                    solidarityTax : row.solidarity
+                } );
+            } );
+            done();
+        } );
+    } );
+
+    it( "should calculate taxes for 2019 properly", function( done ) {
+        loadFixture( "2019-c", function( error : any, data : any ) {
+            if ( error ) { throw error; }
+            data.forEach( ( row : any ) => {
+                tax( row.income, Year.Y2019, { couple : true } ).should.deep.equal( {
+                    incomeTax : row.tax,
+                    solidarityTax : row.solidarity
+                } );
+            } );
+            done();
+        } );
+    } );
+
+    it( "should calculate taxes for 2020 properly", function( done ) {
+        loadFixture( "2020-c", function( error : any, data : any ) {
+            if ( error ) { throw error; }
+            data.forEach( ( row : any ) => {
+                tax( row.income, Year.Y2020, { couple : true } ).should.deep.equal( {
                     incomeTax : row.tax,
                     solidarityTax : row.solidarity
                 } );
