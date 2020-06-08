@@ -10,9 +10,7 @@
 import * as chai from "chai";
 import * as fs from "fs";
 import * as path from "path";
-
-/** CSV library */
-const csv = require( "csv" );
+import * as parse from "csv-parse";
 
 /** Subject */
 import tax, { Year } from "../src";
@@ -31,22 +29,25 @@ chai.should();
  * @param callback
  */
 function loadFixture( name : string, callback : Function ) {
-    fs.readFile( path.join( __dirname, `fixtures/${name}.csv` ), function( err, data ) {
-        if ( err ) { return callback( err ); }
-        csv.parse( data, function( err : any, data : Array<Array<string>> ) {
+    fs.readFile( path.join( __dirname, `fixtures/${name}.csv` ),
+        function( err, data ) {
             if ( err ) { return callback( err ); }
-            callback(
-                null,
-                data.map( row => row.map( column => column.replace( /\./g, "" ) ) )
-                    .map( row => row.map( column => column.replace( /,/g, "." ) ) )
-                    .map( row => ({
-                        income : parseFloat( row[0] ),
-                        tax : parseFloat( row[1] ),
-                        solidarity : parseFloat( row[4] )
-                    }) )
-            )
+            parse( data, function( err : any, data : Array<Array<string>> ) {
+                if ( err ) { return callback( err ); }
+                callback(
+                    null,
+                    data.map( row => row.map( column => column.replace( /\./g,
+                        "" ) ) )
+                        .map( row => row.map( column => column.replace( /,/g,
+                            "." ) ) )
+                        .map( row => ({
+                            income : parseFloat( row[0] ),
+                            tax : parseFloat( row[1] ),
+                            solidarity : parseFloat( row[4] )
+                        }) )
+                )
+            } );
         } );
-    } );
 }
 
 describe( "Tax / Individual", function() {
@@ -136,10 +137,13 @@ describe( "Tax / Family", function() {
         loadFixture( "2015-c", function( error : any, data : any ) {
             if ( error ) { throw error; }
             data.forEach( ( row : any ) => {
-                tax( row.income, Year.Y2015, { couple : true } ).should.deep.equal( {
-                    incomeTax : row.tax,
-                    solidarityTax : row.solidarity
-                } );
+                tax( row.income, Year.Y2015, { couple : true } )
+                    .should
+                    .deep
+                    .equal( {
+                        incomeTax : row.tax,
+                        solidarityTax : row.solidarity
+                    } );
             } );
             done();
         } );
@@ -149,10 +153,13 @@ describe( "Tax / Family", function() {
         loadFixture( "2016-c", function( error : any, data : any ) {
             if ( error ) { throw error; }
             data.forEach( ( row : any ) => {
-                tax( row.income, Year.Y2016, { couple : true } ).should.deep.equal( {
-                    incomeTax : row.tax,
-                    solidarityTax : row.solidarity
-                } );
+                tax( row.income, Year.Y2016, { couple : true } )
+                    .should
+                    .deep
+                    .equal( {
+                        incomeTax : row.tax,
+                        solidarityTax : row.solidarity
+                    } );
             } );
             done();
         } );
@@ -162,10 +169,13 @@ describe( "Tax / Family", function() {
         loadFixture( "2017-c", function( error : any, data : any ) {
             if ( error ) { throw error; }
             data.forEach( ( row : any ) => {
-                tax( row.income, Year.Y2017, { couple : true } ).should.deep.equal( {
-                    incomeTax : row.tax,
-                    solidarityTax : row.solidarity
-                } );
+                tax( row.income, Year.Y2017, { couple : true } )
+                    .should
+                    .deep
+                    .equal( {
+                        incomeTax : row.tax,
+                        solidarityTax : row.solidarity
+                    } );
             } );
             done();
         } );
@@ -175,10 +185,13 @@ describe( "Tax / Family", function() {
         loadFixture( "2018-c", function( error : any, data : any ) {
             if ( error ) { throw error; }
             data.forEach( ( row : any ) => {
-                tax( row.income, Year.Y2018, { couple : true } ).should.deep.equal( {
-                    incomeTax : row.tax,
-                    solidarityTax : row.solidarity
-                } );
+                tax( row.income, Year.Y2018, { couple : true } )
+                    .should
+                    .deep
+                    .equal( {
+                        incomeTax : row.tax,
+                        solidarityTax : row.solidarity
+                    } );
             } );
             done();
         } );
@@ -188,10 +201,13 @@ describe( "Tax / Family", function() {
         loadFixture( "2019-c", function( error : any, data : any ) {
             if ( error ) { throw error; }
             data.forEach( ( row : any ) => {
-                tax( row.income, Year.Y2019, { couple : true } ).should.deep.equal( {
-                    incomeTax : row.tax,
-                    solidarityTax : row.solidarity
-                } );
+                tax( row.income, Year.Y2019, { couple : true } )
+                    .should
+                    .deep
+                    .equal( {
+                        incomeTax : row.tax,
+                        solidarityTax : row.solidarity
+                    } );
             } );
             done();
         } );
@@ -201,10 +217,13 @@ describe( "Tax / Family", function() {
         loadFixture( "2020-c", function( error : any, data : any ) {
             if ( error ) { throw error; }
             data.forEach( ( row : any ) => {
-                tax( row.income, Year.Y2020, { couple : true } ).should.deep.equal( {
-                    incomeTax : row.tax,
-                    solidarityTax : row.solidarity
-                } );
+                tax( row.income, Year.Y2020, { couple : true } )
+                    .should
+                    .deep
+                    .equal( {
+                        incomeTax : row.tax,
+                        solidarityTax : row.solidarity
+                    } );
             } );
             done();
         } );
